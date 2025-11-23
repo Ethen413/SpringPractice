@@ -1,4 +1,4 @@
-package com.practice;
+package com.timeTable;
 
 import junit.framework.Test;
 import junit.framework.TestCase;
