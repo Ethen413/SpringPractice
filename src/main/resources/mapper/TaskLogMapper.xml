@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.timeTable.mapper.TaskLogMapper">
+    <insert id="insert">
+        insert task_log(taskId,start_at,end_at,duration_seconds)
+               values (#{taskId},#{startAt},#{endAt},#{durationSeconds})
+    </insert>
+    <update id="update">
+        update task_log where id = #{id}
+        set
+                        task_id = #{taskId},
+                        start_at = #{startAt},
+                        end_at = #{endAt},
+                        duration_seconds = #{durationSeconds}
+    </update>
+
+    <delete id="delete">
+        delete from task_log where id = #{id}
+    </delete>
+
+
+    <select id="list" resultType="com.timeTable.entity.TaskLog">
+        select * from task_log
+        <where>
+            1 = 1
+            <if test="id != null">
+                AND id = #{id}
+            </if>
+        <if test="taskId != null">
+            AND task_id = #{taskId}
+        </if>
+        <if test="startAt != null">
+            AND start_at = #{startAt}
+        </if>
+        <if test="endAt != null" >
+            AND end_at = #{endAt}
+        </if>
+        <if test="duration_seconds != null">
+          <![CDATA[  AND duration_seconds  <= #{durationSeconds}
+          ]]>
+        </if>
+        </where>
+    </select>
+</mapper>

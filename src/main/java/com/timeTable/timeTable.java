@@ -5,7 +5,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 /**
  * Hello world!
- *
+ * http://localhost:8091/swagger-ui/index.html
+ * 查看api文档
  */
 @SpringBootApplication
 public class timeTable

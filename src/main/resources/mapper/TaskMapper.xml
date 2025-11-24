@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.timeTable.mapper.TaskMapper">
+
+    <select id="findById" resultType="com.timeTable.entity.Task">
+        select * from task where id = #{id}
+    </select>
+    <select id="findByUserId" resultType="com.timeTable.entity.Task">
+        select * from task where user_id = #{userId}
+    </select>
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO task (
+            user_id,
+            task_date,
+            title,
+            description,
+            start_time,
+            end_time,
+            is_recurring,
+            result_description,
+            result_value,
+            result_unit
+        ) VALUES (
+                     #{userId},
+                     #{taskDate},
+                     #{title},
+                     #{description},
+                     #{startTime},
+                     #{endTime},
+                     #{isRecurring},
+                     #{resultDescription},
+                     #{resultValue},
+                     #{resultUnit}
+                 )
+    </insert>
+
+    <!-- 更新 -->
+    <update id="update">
+        UPDATE task
+        SET
+            task_date = #{taskDate},
+            title = #{title},
+            description = #{description},
+            start_time = #{startTime},
+            end_time = #{endTime},
+            is_recurring = #{isRecurring},
+            result_description = #{resultDescription},
+            result_value = #{resultValue},
+            result_unit = #{resultUnit},
+            updated_at = NOW()
+        WHERE id = #{id}
+    </update>
+
+    <!-- 删除 -->
+    <delete id="delete">
+        DELETE FROM task WHERE id = #{id}
+    </delete>
+</mapper>
